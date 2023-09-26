@@ -1,5 +1,6 @@
 name: Slackbot
 nl: {}
+description: Bot voor het communicatiemiddel Slack
 organisation:
   description: Dit is een test repository voor het zelf-documenterende project OpenCatalogi
   logo: https://avatars.githubusercontent.com/u/145778671?v=4
