@@ -1,6 +1,7 @@
----
 name: Metadata Check and Update
+
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -17,7 +18,7 @@ jobs:
       - name: Install PyYAML
         run: pip install PyYAML
       - name: Update Metadata for Organization
-        if: github.event.organization != null
+        if: (!contains(github.repository, '.github'))
         run: >
           ORGANISATION_NAME="${{ github.event.organization.login }}"
 
