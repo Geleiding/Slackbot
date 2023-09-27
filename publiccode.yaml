@@ -1,21 +1,19 @@
----
-description:
-  nl:
-    longDescription: >
-      Een bot voor het automatisch sturen van berichten in het
-      communicatiemiddel Slack
-    shortDescription: >
-      Een bot voor het automatisch sturen van berichten in het
-      communicatiemiddel Slack
+description: Een bot voor het automatisch sturen van berichten in het communicatiemiddel
+  Slack
 name: Slackbot
 nl:
   applicatiefunctie: referentiecomponent
   commonground:
-    - layerType: interface
-    - intendedOrganisations: https://github.com/Geleiding
+  - layerType: interface
+  - intendedOrganisations: https://github.com/Geleiding
+  description:
+    longDescription: Een bot voor het automatisch sturen van berichten in het communicatiemiddel
+      Slack
+    shortDescription: Een bot voor het automatisch sturen van berichten in het communicatiemiddel
+      Slack
   gemma:
     bedrijfsfuncties:
-      - communicatiemiddel
+    - communicatiemiddel
 organisation:
   description: Dit is een test repository voor het zelf-documenterende project OpenCatalogi
   logo: https://avatars.githubusercontent.com/u/145778671?v=4
