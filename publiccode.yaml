@@ -1,5 +1,8 @@
-description: Een bot voor het automatisch sturen van berichten in het communicatiemiddel
-  Slack
+description:
+  longDescription: Een bot voor het automatisch sturen van berichten in het communicatiemiddel
+    Slack
+  shortDescription: Een bot voor het automatisch sturen van berichten in het communicatiemiddel
+    Slack
 name: Slackbot
 nl:
   applicatiefunctie: referentiecomponent
