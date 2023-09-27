@@ -44,6 +44,8 @@ jobs:
                   data = yaml.safe_load(f)
           except FileNotFoundError:
               data = {}
+          if not isinstance(data, dict):
+              data = {}
           created_at_date = datetime.now().strftime('%Y-%m-%d')
           if "$REPO_NAME" != "null" and "$REPO_NAME":
               data['name'] = "$REPO_NAME"
