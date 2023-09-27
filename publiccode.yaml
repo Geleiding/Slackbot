@@ -5,7 +5,7 @@ nl:
   applicaitefunctie: referentiecomponent
   commonground:
   - layerType: interface
-  - intendedORganisations: https://github.com/Geleiding
+  - intendedOrganisations: https://github.com/Geleiding
   gemma:
     bedrijfsfuncties:
     - communicatiemiddel
