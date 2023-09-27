@@ -71,6 +71,9 @@ jobs:
           #    data['topics'] = "$REPO_TOPICS"
           if "$REPO_LICENSE" != "null" and "$REPO_LICENSE":
               data['license'] = "$REPO_LICENSE"
+            
+          print(f"REPO_DESC from GitHub: $REPO_DESC")
+          print(f"Current description in data: {data.get('description', 'Not set')}")
 
           # Add releaseDate if not present
           if 'releaseDate' not in data:
