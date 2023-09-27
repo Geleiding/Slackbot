@@ -1,7 +1,5 @@
-description:
-  longDescription: Placeholder for long description from README
-  shortDescription: Een bot voor het automatisch sturen van berichten in het communicatiemiddel
-    Slack
+description: Een bot voor het automatisch sturen van berichten in het communicatiemiddel
+  Slack
 name: Slackbot
 nl:
   applicatiefunctie: referentiecomponent
