@@ -44,6 +44,55 @@ jobs:
                   data = yaml.safe_load(f)
           except FileNotFoundError:
               data = {}
+          if data is None or not isinstance(data, dict):
+              data = {}
+          # ... (rest of the code remains the same)
+          END
+This updated code includes a check to ensure that data is a dictionary. If data is None or not a dictionary, it will be initialized as an empty dictionary. This should resolve the error you're encountering.
+
+
+
+
+User
+Installing collected packages: PyYAML
+Successfully installed PyYAML-6.0.1
+Updating publiccode.yaml...
+Traceback (most recent call last):
+  File "<stdin>", line 37, in <module>
+TypeError: 'str' object does not support item assignment
+Error: Process completed with exit code 1.
+ChatGPT
+The error message indicates that the data variable is a string, which is not mutable in Python. This likely occurs because the yaml.safe_load(f) function is returning a string instead of a dictionary. This could happen if the publiccode.yaml file is empty or not properly formatted.
+
+To address this, you can add a check to ensure that data is a dictionary before attempting to modify it. Here's how you can update the relevant part of your GitHub Actions workflow YAML file:
+
+yaml
+Copy code
+      - name: Check and Update publiccode.yaml
+        if: (!contains(github.repository, '.github'))
+        run: |
+          REPO_NAME="${{ github.event.repository.name }}"
+          REPO_DESC="${{ github.event.repository.description }}"
+          REPO_URL="${{ github.event.repository.html_url }}"
+          REPO_HOMEPAGE="${{ github.event.repository.homepage }}"
+          REPO_LICENSE="${{ github.event.repository.license.key }}"
+          REPO_CREATED_AT="${{ github.event.repository.created_at }}"
+          ORGANISATION_NAME="${{ github.event.organization.login }}"     
+          ORGANISATION_DESCRIPTION="${{ github.event.organization.description }}"     
+          ORGANISATION_GITID="${{ github.event.organization.id}}"     
+          ORGANISATION_URL="${{ github.event.organization.login }}"     
+          ORGANISATION_AVATAR="${{ github.event.organization.avatar_url }}"     
+          echo "Installing PyYAML..."
+          pip install PyYAML
+          echo "Updating publiccode.yaml..."
+          python - <<END
+          import yaml
+          from datetime import datetime
+          try:
+              with open("publiccode.yaml", "r") as f:
+                  data = yaml.safe_load(f)
+          except FileNotFoundError:
+              data = {}
           if not isinstance(data, dict):
               data = {}
           created_at_date = datetime.now().strftime('%Y-%m-%d')
