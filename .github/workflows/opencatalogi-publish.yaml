@@ -21,16 +21,13 @@
             echo "Installing PyYAML..."
   
             pip install PyYAML
-            pip install requests
+            python -m pip install requests
   
             echo "Checking publiccode.yaml..."
-  
             python - <<END
-  
             import yaml
             import json
             import requests
-  
             from datetime import datetime
   
             try:
