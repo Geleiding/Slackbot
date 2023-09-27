@@ -22,23 +22,10 @@ jobs:
       - name: Check and Update publiccode.yaml
         if: (!contains(github.repository, '.github'))
         run: |
-          REPO_NAME="${{ github.event.repository.name }}"
-          REPO_DESC="${{ github.event.repository.description }}"
-          REPO_URL="${{ github.event.repository.html_url }}"
-          REPO_HOMEPAGE="${{ github.event.repository.homepage }}"
-          REPO_LICENSE="${{ github.event.repository.license.key }}"
-          REPO_CREATED_AT="${{ github.event.repository.created_at }}"
-
-          ORGANISATION_NAME="${{ github.event.organization.login }}"     
-          ORGANISATION_DESCRIPTION="${{ github.event.organization.description }}"     
-          ORGANISATION_GITID="${{ github.event.organization.id}}"     
-          ORGANISATION_URL="${{ github.event.organization.login }}"     
-          ORGANISATION_AVATAR="${{ github.event.organization.avatar_url }}"     
-
           echo "Installing PyYAML..."
           pip install PyYAML
 
-          echo "Updating publiccode.yaml..."
+          echo "Checking publiccode.yaml..."
           python - <<END
           import yaml
           import json
@@ -50,61 +37,43 @@ jobs:
           except FileNotFoundError:
               data = {}
 
-          created_at_date = datetime.now().strftime('%Y-%m-%d')
+          if not data:
+              REPO_NAME="${{ github.event.repository.name }}"
+              REPO_DESC="${{ github.event.repository.description }}"
+              REPO_URL="${{ github.event.repository.html_url }}"
+              REPO_HOMEPAGE="${{ github.event.repository.homepage }}"
+              REPO_LICENSE="${{ github.event.repository.license.key }}"
+              REPO_CREATED_AT="${{ github.event.repository.created_at }}"
+              ORGANISATION_NAME="${{ github.event.organization.login }}"     
+              ORGANISATION_DESCRIPTION="${{ github.event.organization.description }}"     
+              ORGANISATION_GITID="${{ github.event.organization.id}}"     
+              ORGANISATION_URL="${{ github.event.organization.login }}"     
+              ORGANISATION_AVATAR="${{ github.event.organization.avatar_url }}"     
 
-          if "$REPO_NAME" != "null" and "$REPO_NAME":
-              data['name'] = "$REPO_NAME"
-          if "$REPO_URL" != "null" and "$REPO_URL":
-              data['url'] = "$REPO_URL"
-          if "$REPO_DESC" != "null" and "$REPO_DESC":
-              data['description'] = "$REPO_DESC"
-          if "$REPO_HOMEPAGE" != "null" and "$REPO_HOMEPAGE":
-              data['url'] = "$REPO_HOMEPAGE"
-          if "$REPO_LICENSE" != "null" and "$REPO_LICENSE":
-              data['license'] = "$REPO_LICENSE"
-
-          if 'releaseDate' not in data:
-              data['releaseDate'] = created_at_date
-
-          if 'organisation' not in data:
-              data['organisation'] = {}
-          if "$ORGANISATION_NAME" != "null" and "$ORGANISATION_NAME":
-              data['organisation']['name'] = "$ORGANISATION_NAME"
-          if "$ORGANISATION_AVATAR" != "null" and "$ORGANISATION_AVATAR":
-              data['organisation']['logo'] = "$ORGANISATION_AVATAR"
-          if "$ORGANISATION_URL" != "null" and "$ORGANISATION_URL":
-              data['organisation']['url'] = "$ORGANISATION_URL"
-          if "$ORGANISATION_DESCRIPTION" != "null" and "$ORGANISATION_DESCRIPTION":
-              data['organisation']['description'] = "$ORGANISATION_DESCRIPTION"
-
-          if 'nl' not in data:
-              data['nl'] = {}
-          if 'description' not in data['nl']:
-              data['nl']['description'] = {}
-          if "$REPO_DESC" != "null" and "$REPO_DESC":
-              data['nl']['description']['longDescription'] = "$REPO_DESC"
-              data['nl']['description']['shortDescription'] = "$REPO_DESC"
-
-          with open("publiccode.yaml", "w") as f:
-              yaml.safe_dump(data, f)
+              created_at_date = datetime.now().strftime('%Y-%m-%d')
+              data = {
+                  'name': REPO_NAME,
+                  'url': REPO_URL,
+                  'description': REPO_DESC,
+                  'license': REPO_LICENSE,
+                  'releaseDate': created_at_date,
+                  'organisation': {
+                      'name': ORGANISATION_NAME,
+                      'logo': ORGANISATION_AVATAR,
+                      'url': ORGANISATION_URL,
+                      'description': ORGANISATION_DESCRIPTION
+                  }
+              }
+              with open("publiccode.yaml", "w") as f:
+                  yaml.safe_dump(data, f)
+          else:
+              short_description = data.get('nl', {}).get('description', {}).get('shortDescription', '')
+              long_description = data.get('nl', {}).get('description', {}).get('longDescription', '')
           END
 
       - name: Check and Update opencatalogi.yaml
         if: (contains(github.repository, '.github'))
         run: |
-          REPO_NAME="${{ github.event.repository.name }}"
-          REPO_DESC="${{ github.event.repository.description }}"
-          REPO_URL="${{ github.event.repository.html_url }}"
-          REPO_HOMEPAGE="${{ github.event.repository.homepage }}"
-          REPO_LICENSE="${{ github.event.repository.license.key }}"
-          REPO_CREATED_AT="${{ github.event.repository.created_at }}"
-
-          ORGANISATION_NAME="${{ github.event.organization.login }}"     
-          ORGANISATION_DESCRIPTION="${{ github.event.organization.description }}"     
-          ORGANISATION_GITID="${{ github.event.organization.id}}"     
-          ORGANISATION_URL="${{ github.event.organization.login }}"     
-          ORGANISATION_AVATAR="${{ github.event.organization.avatar_url }}"     
-
           echo "Installing PyYAML..."
           pip install PyYAML
 
@@ -120,14 +89,18 @@ jobs:
           except FileNotFoundError:
               data = {}
 
-          if "$ORGANISATION_NAME" != "null" and "$ORGANISATION_NAME":
-              data['name'] = "$ORGANISATION_NAME"
-          if "$ORGANISATION_AVATAR" != "null" and "$ORGANISATION_AVATAR":
-              data['logo'] = "$ORGANISATION_AVATAR"
-          if "$ORGANISATION_URL" != "null" and "$ORGANISATION_URL":
-              data['url'] = "$ORGANISATION_URL"
-          if "$ORGANISATION_DESCRIPTION" != "null" and "$ORGANISATION_DESCRIPTION":
-              data['description'] = "$ORGANISATION_DESCRIPTION"
+          REPO_NAME="${{ github.event.repository.name }}"
+          REPO_DESC="${{ github.event.repository.description }}"
+          REPO_URL="${{ github.event.repository.html_url }}"
+          REPO_HOMEPAGE="${{ github.event.repository.homepage }}"
+          REPO_LICENSE="${{ github.event.repository.license.key }}"
+          REPO_CREATED_AT="${{ github.event.repository.created_at }}"
+
+          ORGANISATION_NAME="${{ github.event.organization.login }}"     
+          ORGANISATION_DESCRIPTION="${{ github.event.organization.description }}"     
+          ORGANISATION_GITID="${{ github.event.organization.id}}"     
+          ORGANISATION_URL="${{ github.event.organization.login }}"     
+          ORGANISATION_AVATAR="${{ github.event.organization.avatar_url }}"     
 
           if 'nl' not in data:
               data['nl'] = {}
