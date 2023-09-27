@@ -1,49 +1,3 @@
-name: Metadata Check and Update
-
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
-
-jobs:
-  check-and-update:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.x
-
-      - name: Install PyYAML
-        run: pip install PyYAML
-
-      - name: Update Metadata for Organization
-        if: contains(github.repository, '.github')
-        run: |
-          ORGANISATION_NAME="${{ github.event.organization.login }}"
-          ORGANISATION_DESCRIPTION="${{ github.event.organization.description }}"
-          ORGANISATION_ID="${{ github.event.organization.id }}"
-          ORGANISATION_AVATAR="${{ github.event.organization.avatar_url }}"
-
-          python - <<END
-          import yaml
-
-          data = {
-            'name': "$ORGANISATION_NAME",
-            'description': "$ORGANISATION_DESCRIPTION",
-            'id': "$ORGANISATION_ID",
-            'avatar_url': "$ORGANISATION_AVATAR"
-          }
-
-          with open("openCatalogi.yaml", "w") as f:
-              yaml.safe_dump(data, f)
-          END
-
       - name: Update Metadata for Repository
         if: "!contains(github.repository, '.github')"
         run: |
@@ -58,30 +12,29 @@ jobs:
 
           data = {
             'name': "$REPO_NAME",
-            'description': "$REPO_DESC",
             'url': "$REPO_URL",
             'license': "$REPO_LICENSE",
-            'created_at': "$REPO_CREATED_AT"
+            'created_at': "$REPO_CREATED_AT",
+            'description': {
+              'nl': {
+                'shortDescription': "$REPO_DESC"
+              }
+            },
+            'nl': {
+              'countryExtensionVersion': '1.0',
+              'commonground': [
+                {'layerType': 'interface'},
+                {'installationType': 'helm'},
+                {'intendedOrganisations': 'https://github.com/Rotterdam'}
+              ],
+              'gemma': {
+                'bedrijfsfuncties': ['sadsad', 'sadsad'],
+                'bedrijfsservices': ['sadsad', 'sadsad'],
+                'applicatiefunctie': 'referentie component'
+              }
+            }
           }
 
           with open("publiccode.yaml", "w") as f:
               yaml.safe_dump(data, f)
           END
-
-      - name: Commit changes for Organization
-        if: contains(github.repository, '.github')
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add openCatalogi.yaml
-          git commit -m "Update openCatalogi.yaml" || echo "No changes to commit"
-          git push
-
-      - name: Commit changes for Repository
-        if: "!contains(github.repository, '.github')"
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add publiccode.yaml
-          git commit -m "Update publiccode.yaml" || echo "No changes to commit"
-          git push
