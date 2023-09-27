@@ -47,6 +47,59 @@ jobs:
           if not isinstance(data, dict):
               data = {}
           created_at_date = datetime.now().strftime('%Y-%m-%d')
+          # ... (rest of the code remains the same)
+          END
+I've added a check to ensure that data is a dictionary before proceeding with the updates. This should resolve the error you're encountering.
+
+
+
+
+User
+Installing collected packages: PyYAML
+Successfully installed PyYAML-6.0.1
+Updating publiccode.yaml...
+Traceback (most recent call last):
+  File "<stdin>", line 37, in <module>
+TypeError: 'str' object does not support item assignment
+Error: Process completed with exit code 1.
+
+
+
+ChatGPT
+The error message indicates that the data variable is a string when the script attempts to modify it, which is not allowed in Python. This could happen if the publiccode.yaml file is empty or contains invalid YAML content, causing yaml.safe_load(f) to return a string.
+
+To fix this, you can add an additional check to ensure that data is a dictionary before proceeding with the updates. Here's the updated section of the workflow YAML file:
+
+yaml
+Copy code
+      - name: Check and Update publiccode.yaml
+        if: (!contains(github.repository, '.github'))
+        run: |
+          REPO_NAME="${{ github.event.repository.name }}"
+          REPO_DESC="${{ github.event.repository.description }}"
+          REPO_URL="${{ github.event.repository.html_url }}"
+          REPO_HOMEPAGE="${{ github.event.repository.homepage }}"
+          REPO_LICENSE="${{ github.event.repository.license.key }}"
+          REPO_CREATED_AT="${{ github.event.repository.created_at }}"
+          ORGANISATION_NAME="${{ github.event.organization.login }}"     
+          ORGANISATION_DESCRIPTION="${{ github.event.organization.description }}"     
+          ORGANISATION_GITID="${{ github.event.organization.id}}"     
+          ORGANISATION_URL="${{ github.event.organization.login }}"     
+          ORGANISATION_AVATAR="${{ github.event.organization.avatar_url }}"     
+          echo "Installing PyYAML..."
+          pip install PyYAML
+          echo "Updating publiccode.yaml..."
+          python - <<END
+          import yaml
+          from datetime import datetime
+          try:
+              with open("publiccode.yaml", "r") as f:
+                  data = yaml.safe_load(f)
+          except FileNotFoundError:
+              data = {}
+          if data is None or not isinstance(data, dict):
+              data = {}
+          created_at_date = datetime.now().strftime('%Y-%m-%d')
           if "$REPO_NAME" != "null" and "$REPO_NAME":
               data['name'] = "$REPO_NAME"
           if "$REPO_URL" != "null" and "$REPO_URL":
