@@ -21,7 +21,7 @@
             echo "Installing PyYAML..."
   
             pip install PyYAML
-            pip install requestss
+            pip install requests
   
             echo "Checking publiccode.yaml..."
   
