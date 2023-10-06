@@ -3,4 +3,11 @@ description: Een bot voor het automatisch sturen van berichten in het communicat
   Slack
 license: ''
 name: Slackbot
+nl: {}
+organisation:
+  description: Dit is een test repository voor het zelf-documenterende project OpenCatalogi
+  logo: https://avatars.githubusercontent.com/u/145778671?v=4
+  name: Geleiding
+  url: Geleiding
+releaseDate: '2023-10-06'
 url: https://github.com/Geleiding/Slackbot
