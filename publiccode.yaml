@@ -11,7 +11,8 @@ description:
     localisedName: ''
     longDescription: ''
     screenshots: []
-    shortDescription: ''
+    shortDescription: Een bot voor het automatisch sturen van berichten in het communicatiemiddel
+      Slack
     videos: []
 developmentStatus: development
 landingURL: ''
