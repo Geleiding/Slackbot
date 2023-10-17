@@ -17,6 +17,8 @@ description:
   nl:
     shortDescription: Een bot voor het automatisch sturen van berichten in het communicatiemiddel
       Slack
+    longDescription: Een bot voor het automatisch sturen van berichten in het communicatiemiddel
+      Slack
 developmentStatus: development
 landingURL: ''
 legal:
