@@ -1,34 +1,34 @@
+---
 categories:
-- it-development
+  - it-development
 description:
   en:
-    apiDocumentation: ''
+    apiDocumentation: ""
     awards: []
-    documentation: ''
+    documentation: ""
     features: []
-    genericName: Een bot voor het automatisch sturen van berichten in het communicatiemiddel
-      Slack
-    localisedName: ''
-    longDescription: ''
+    genericName: Een bot voor het automatisch sturen van berichten in het
+      communicatiemiddel Slack
+    localisedName: ""
+    longDescription: ""
     screenshots: []
-    shortDescription: ''
-      Slack
+    shortDescription: ""
     videos: []
   nl:
-    longDescription: Een bot voor het automatisch sturen van berichten in het communicatiemiddel
-      Slack
-    shortDescription: Een bot voor het automatisch sturen van berichten in het communicatiemiddel
-      Slack
+    longDescription: Een bot voor het automatisch sturen van berichten in het
+      communicatiemiddel Slack
+    shortDescription: Een bot voor het automatisch sturen van berichten in het
+      communicatiemiddel Slack
 developmentStatus: development
-landingURL: ''
+landingURL: ""
 legal:
-  authorsFile: ''
-  license: ''
-  mainCopyrightOwner: ''
-  repoOwner: ''
+  authorsFile: ""
+  license: ""
+  mainCopyrightOwner: ""
+  repoOwner: ""
 localisation:
   availableLanguages:
-  - en
+    - en
   localisationReady: false
 maintenance:
   contacts: []
@@ -45,11 +45,11 @@ organisation:
   name: Geleiding
   url: Geleiding
 platforms:
-- web
-publiccodeYmlVersion: '0.2'
-releaseDate: '2023-10-16'
-roadmap: ''
+  - web
+publiccodeYmlVersion: "0.2"
+releaseDate: 2023-10-16
+roadmap: ""
 softwareType: standalone/web
-softwareVersion: ''
+softwareVersion: ""
 url: https://github.com/Geleiding/Slackbot
 usedBy: []
