@@ -14,9 +14,9 @@ description:
     shortDescription: Een bot voor het automatisch sturen van berichten in het communicatiemiddel
       Slack
     videos: []
-  nl: 
+  nl:
     shortDescription: Een bot voor het automatisch sturen van berichten in het communicatiemiddel
-      Slack 
+      Slack
 developmentStatus: development
 landingURL: ''
 legal:
