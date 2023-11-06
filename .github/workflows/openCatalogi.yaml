@@ -18,3 +18,5 @@ jobs:
       opencatalogi: true
    - name: Create een Productpagina
      uses: OpenCatalogi/productpage-action@1.0.0
+   - name: Create an Open Catalogi page
+     uses: OpenCatalogi/opencatalogi-action@1.1.0
