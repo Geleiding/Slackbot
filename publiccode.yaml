@@ -1,0 +1,49 @@
+categories:
+- it-development
+description:
+  en:
+    apiDocumentation: ''
+    awards: []
+    documentation: ''
+    features: []
+    genericName: Een bot voor het automatisch sturen van berichten in het communicatiemiddel
+      Slack
+    localisedName: ''
+    longDescription: ''
+    screenshots: []
+    shortDescription: ''
+    videos: []
+developmentStatus: development
+landingURL: ''
+legal:
+  authorsFile: ''
+  license: ''
+  mainCopyrightOwner: ''
+  repoOwner: ''
+localisation:
+  availableLanguages:
+  - en
+  localisationReady: false
+maintenance:
+  contacts: []
+  contractors: []
+  type: none
+name: Slackbot
+nl:
+  vng:
+    commonground: []
+    gemma: []
+organisation:
+  description: Dit is een test repository voor het zelf-documenterende project OpenCatalogi
+  logo: https://avatars.githubusercontent.com/u/145778671?v=4
+  name: Geleiding
+  url: Geleiding
+platforms:
+- web
+publiccodeYmlVersion: '0.2'
+releaseDate: '2024-04-08'
+roadmap: ''
+softwareType: standalone/web
+softwareVersion: ''
+url: https://github.com/Geleiding/Slackbot
+usedBy: []
